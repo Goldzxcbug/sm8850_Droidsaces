@@ -561,7 +561,9 @@ jobs:
             wget https://raw.githubusercontent.com/cyanmint/GKI_KernelSU_SUSFS/refs/heads/new/lxc_docker_patches/a16-6.12/gki_use_Android_ABI_padding_for_CGROUP_DEVICE_dev_cgroup_fields.patch            
             wget https://raw.githubusercontent.com/cyanmint/GKI_KernelSU_SUSFS/refs/heads/new/lxc_docker_patches/a16-6.12/gki_use_Android_ABI_padding_for_cgroup_subsys_struct.patch            
             wget https://raw.githubusercontent.com/cyanmint/GKI_KernelSU_SUSFS/refs/heads/new/lxc_docker_patches/a16-6.12/cgroup_fix_cgroup_prefix.patch
-
+            wget https://raw.githubusercontent.com/Goldzxcbug/Kernel_patch/refs/heads/main/Droidspaces/03.5.15%2B_use_android_abi_padding_for_posix_mqueue.patch
+            
+            patch -p1 < '03.5.15+_use_android_abi_padding_for_posix_mqueue.patch'
             patch -p1 < cgroup_fix_cgroup_prefix.patch
             patch -p1 < gki_use_Android_ABI_padding_for_SYSVIPC_task_struct_fields.patch
             patch -p1 < gki_use_Android_ABI_padding_for_ipc_namespace_struct.patch
