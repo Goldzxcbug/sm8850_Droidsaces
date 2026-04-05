@@ -712,7 +712,7 @@ jobs:
           echo "编译后空间:"
           df -h
           
-       - name: 开起ssh连接
+      - name: 开起ssh连接
          uses: mxschmitt/action-tmate@v3
 
       - name: 保存新的 ccache 缓存
