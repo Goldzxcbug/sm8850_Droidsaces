@@ -713,7 +713,7 @@ jobs:
           df -h
           
       - name: 开起ssh连接
-         uses: mxschmitt/action-tmate@v3
+        uses: mxschmitt/action-tmate@v3
 
       - name: 保存新的 ccache 缓存
         if: inputs.ccache_update || steps.ccache-restore.outputs.cache-hit != 'true'
