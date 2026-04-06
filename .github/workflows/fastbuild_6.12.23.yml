@@ -696,7 +696,7 @@ jobs:
           export CC="$(pwd)/cc-wrapper" && export LD="$(pwd)/ld-wrapper" 
           make -j$(nproc --all) LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CC="$(pwd)/cc-wrapper" LD="$(pwd)/ld-wrapper" OBJCOPY="llvm-objcopy" O=out Image
           make -j$(nproc --all) LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- O=out modules
-          make -j$(nproc --all) LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- O=out INSTALL_MOD_PATH=out/staging modules_install
+          make -j$(nproc --all) LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- O=out INSTALL_MOD_PATH=staging modules_install
           
           # 编译后时间劫持二次校验
           echo "--- 编译后环境时间: $(LD_PRELOAD=$PRELOAD_LIBS date) ---"
@@ -717,7 +717,7 @@ jobs:
           
       - name : 打包staging
         run : |
-             tar czf ~/work/sm8850_Droidspaces/sm8850_Droidspaces/kernel_workspace/awa.tar.gz ~/work/sm8850_Droidspaces/sm8850_Droidspaces/kernel_workspace/common/out/out/staging/lib/modules/${{ env.FULL_VERSION }}
+             tar czf ~/work/sm8850_Droidspaces/sm8850_Droidspaces/kernel_workspace/awa.tar.gz ~/work/sm8850_Droidspaces/sm8850_Droidspaces/kernel_workspace
 
 
 
