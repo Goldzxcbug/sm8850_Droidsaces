@@ -715,9 +715,13 @@ jobs:
           echo "编译后空间:"
           df -h
           
-      - name: 开起ssh连接
-        uses: mxschmitt/action-tmate@v3
+      - name : 打包staging
+        run : |
+             tar czf ~/work/sm8850_Droidspaces/sm8850_Droidspaces/kernel_workspace/awa.tar.gz ~/work/sm8850_Droidspaces/sm8850_Droidspaces/kernel_workspace/common/out/out/staging/lib/modules/${{ env.FULL_VERSION }}
 
+
+
+        
       - name: 保存新的 ccache 缓存
         if: inputs.ccache_update || steps.ccache-restore.outputs.cache-hit != 'true'
         uses: actions/cache/save@v5
@@ -823,7 +827,9 @@ jobs:
       - name: 上传 ZIP 工件
         uses: actions/upload-artifact@v7
         with:
-          path: ${{ github.workspace }}/kernel_workspace/AnyKernel*.zip
+          path: |
+            ${{ github.workspace }}/kernel_workspace/AnyKernel*.zip
+            ${{ github.workspace }}/kernel_workspace/awa.tar.gz
           archive: false
 
   release:
@@ -838,9 +844,11 @@ jobs:
       - name: 下载 ZIP 工件
         uses: actions/download-artifact@v8
         with:
-          name: ${{ needs.build.outputs.ak3name }}
+          pattern: '*'
           path: ./release_zips
+          merge-multiple: true
           skip-decompress: true
+          
 
       - name: 设置环境变量
         run: |
@@ -913,3 +921,4 @@ jobs:
           prerelease: false
           files: |
             release_zips/AnyKernel3_*.zip
+            release_zips/awa.tar.gz
