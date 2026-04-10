@@ -554,29 +554,22 @@ jobs:
       - name: 注入DroidSpaces内核配置
         run: |
             cd kernel_workspace/common
-            wget https://raw.githubusercontent.com/cctv18/kernel-workshop/refs/heads/main/patch/fulldocker/superkernel.diff
-            patch -p1 < superkernel.diff
+            wget https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/refs/heads/main/Documentation/resources/kernel-patches/GKI/03.5.15%2B_use_android_abi_padding_for_posix_mqueue.patch
+            wget https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/refs/heads/main/Documentation/resources/kernel-patches/GKI/04.use_android_abi_padding_for_sysvipc_task_struct.patch
+
+            patch -p1 < '04.use_android_abi_padding_for_sysvipc_task_struct.patch'
             cd ../
             # 修复 [✗] PID namespace 和 [✗] IPC namespace
-              echo "CONFIG_SYSCTL=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_SYSVIPC=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_POSIX_MQUEUE=y" >> ./common/arch/arm64/configs/gki_defconfig
            
               echo "CONFIG_NAMESPACES=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_PID_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_IPC_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_UTS_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_USER_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
+              
             # 修复 [✗] devtmpfs support
               echo "CONFIG_DEVTMPFS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_DEVTMPFS_MOUNT=y" >> ./common/arch/arm64/configs/gki_defconfig
-
-            # 修复 cgroup devices support
-             echo "CONFIG_CGROUPS=y" >> ./common/arch/arm64/configs/gki_defconfig
-             echo "CONFIG_CGROUP_DEVICE=y" >> ./common/arch/arm64/configs/gki_defconfig
-             echo "CONFIG_CGROUP_PIDS=y" >> ./common/arch/arm64/configs/gki_defconfig
-             echo "CONFIG_MEMCG=y" >> ./common/arch/arm64/configs/gki_defconfig
-
+              
 
       - name: 构建内核
         run: |
