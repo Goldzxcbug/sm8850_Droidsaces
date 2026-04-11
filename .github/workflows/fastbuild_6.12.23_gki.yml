@@ -557,24 +557,15 @@ jobs:
             patch -p1 < superkernel.diff
             cd ../
             # 修复 [✗] PID namespace 和 [✗] IPC namespace
-              echo "CONFIG_SYSCTL=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_SYSVIPC=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_POSIX_MQUEUE=y" >> ./common/arch/arm64/configs/gki_defconfig
            
               echo "CONFIG_NAMESPACES=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_PID_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_IPC_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_UTS_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_USER_NS=y" >> ./common/arch/arm64/configs/gki_defconfig
+              
             # 修复 [✗] devtmpfs support
               echo "CONFIG_DEVTMPFS=y" >> ./common/arch/arm64/configs/gki_defconfig
-              echo "CONFIG_DEVTMPFS_MOUNT=y" >> ./common/arch/arm64/configs/gki_defconfig
-
-            # 修复 cgroup devices support
-             echo "CONFIG_CGROUPS=y" >> ./common/arch/arm64/configs/gki_defconfig
-             echo "CONFIG_CGROUP_DEVICE=y" >> ./common/arch/arm64/configs/gki_defconfig
-             echo "CONFIG_CGROUP_PIDS=y" >> ./common/arch/arm64/configs/gki_defconfig
-             echo "CONFIG_MEMCG=y" >> ./common/arch/arm64/configs/gki_defconfig
       - name: 构建内核
         run: |
           WORKDIR="$(pwd)"
