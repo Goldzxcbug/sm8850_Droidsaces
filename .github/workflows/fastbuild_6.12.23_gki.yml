@@ -562,6 +562,7 @@ jobs:
             patch -p1 < 'ntsync_compat_android16-6.12.patch'
             
             cd ../
+              echo "CONFIG_NTSYNC=y" >> ./common/arch/arm64/configs/gki_defconfig
             # 修复 [✗] PID namespace 和 [✗] IPC namespace
               echo "CONFIG_SYSCTL=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_SYSVIPC=y" >> ./common/arch/arm64/configs/gki_defconfig
