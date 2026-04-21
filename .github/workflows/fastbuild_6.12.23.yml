@@ -554,9 +554,11 @@ jobs:
       - name: 注入DroidSpaces内核配置
         run: |
             cd kernel_workspace/common
-            wget https://raw.githubusercontent.com/superturtlee/kernel-workshop-docker/refs/heads/main/patch/fulldocker/superkernel.diff
-            patch -p1 < 'superkernel.diff'
-
+            wget https://raw.githubusercontent.com/Goldzxcbug/Droidspaces_Kernel_patch/refs/heads/main/OKI/6.12/03.5.15%2B_use_android_abi_padding_for_posix_mqueue.patch
+            wget https://raw.githubusercontent.com/Goldzxcbug/Droidspaces_Kernel_patch/refs/heads/main/OKI/6.12/SYSVIPC.patch
+            patch -p1 < '03.5.15+_use_android_abi_padding_for_posix_mqueue.patch'
+            patcj -p1 < 'SYSVIPC.patch'
+            
             
             cd ../
             # 修复 [✗] PID namespace 和 [✗] IPC namespace
