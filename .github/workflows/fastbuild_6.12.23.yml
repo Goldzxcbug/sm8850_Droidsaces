@@ -554,9 +554,9 @@ jobs:
       - name: 注入DroidSpaces内核配置
         run: |
             cd kernel_workspace/common
-          
+            wget https://raw.githubusercontent.com/Goldzxcbug/Droidspaces_Kernel_patch/refs/heads/main/OKI/6.12/pid_oplus_bsp_midas.patch
             wget https://raw.githubusercontent.com/Goldzxcbug/Droidspaces_Kernel_patch/refs/heads/main/OKI/6.12/SYSVIPC.patch
-           
+            patch -p1 < 'pid_oplus_bsp_midas.patch'
             patch -p1 < 'SYSVIPC.patch'
             
             
