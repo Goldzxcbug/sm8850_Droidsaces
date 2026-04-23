@@ -564,6 +564,7 @@ jobs:
             
             
             cd ../
+              echo "CONFIG_NTSYNC=y" >> ./common/arch/arm64/configs/gki_defconfig
             # 修复 [✗] PID namespace 和 [✗] IPC namespace
               echo "CONFIG_SYSVIPC=y" >> ./common/arch/arm64/configs/gki_defconfig
               echo "CONFIG_POSIX_MQUEUE=y" >> ./common/arch/arm64/configs/gki_defconfig
